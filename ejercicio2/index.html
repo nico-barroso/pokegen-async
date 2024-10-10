@@ -1,3 +1,6 @@
+<!-- Recuerda quitarle el comentario a la API
+ 2. Quitarle el texto al h1 para conectarlo a la API
+ -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,13 +11,56 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="big-text">
-      <h1></h1>
-    </div>
-    <section id="pokemon">
-      <img class="random-image" />
-
-      <div class="type"></div>
-    </section>
+    <header>
+      <nav>
+        <ul>
+          <!-- <li><img src="./assets/logo.png" alt="" class="logo" /></li> -->
+        </ul>
+        <ul></ul>
+      </nav>
+    </header>
+    <main>
+      <section class="top-tittle">
+        <h1 class="pokemon-name"></h1>
+        <h2 class="id">#230</h2>
+      </section>
+      <div class="flex-container">
+        <section class="left-column">
+          <article class="img-container">
+            <img class="random-image primary" src="" />
+          </article>
+        </section>
+        <section class="right-column">
+          <p class="flavor-text"></p>
+          <article class="egg-group">
+            <h3>Grupos de huevos</h3>
+            <p></p>
+          </article>
+          <article id="types">
+            <h3>Tipos</h3>
+            <p></p>
+          </article>
+          <div class="height">
+            <h3>Altura</h3>
+            <p></p>
+          </div>
+          <div class="weight">
+            <h3>Peso</h3>
+            <p></p>
+          </div>
+          <div class="habitat">
+            <h3>Habitat</h3>
+            <p></p>
+          </div>
+          <div id="shiny"class="shiny">
+            <h3>Version variocolor</h3>
+            <img class="random-image primary" src="" />
+        </section>
+      </div>
+    </main>
+    <footer>
+      <div class="bg-footer"></div>
+      <button>Generar Pokémon</button>
+    </footer>
   </body>
 </html>
