@@ -1,0 +1,540 @@
+/* Importación de fuentes */
+/* Xena */ /* Paralucent */
+@import url("https://use.typekit.net/qzi0yho.css");
+
+:root {
+  --radius: 10px;
+  --poke-red: #e04d34;
+  --secondary-color: #ffffff;
+  --light-gray: #bbbbbb;
+  --poke-blue: rgb(121 206 237);
+  --poke-dark-blue: #2980b9;
+  --primary-color: #white;
+  --black: #422800;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  transition: all 0.3s;
+}
+
+body {
+  /*Está en el body por motivos de overflow en el footer.
+  En este caso, al existir bloques sobreexpuestos en el footer, se necesita poner el overflow hidden,
+  en el body para que el degradado del fondo se vea correcto
+  */
+  overflow: hidden !important;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: -webkit-linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+  background: linear-gradient(to bottom, #2980b9, #6dd5fa, #ffffff);
+  color: var(--black);
+}
+
+/*Cuadrado de decoración azul en la parte central superior*/
+
+#loading-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  z-index: 9999;
+}
+/* Página oculta inicialmente */
+body.loaded #loading-animation {
+  display: none;
+}
+.decorative__blue-notch {
+  position: absolute;
+  width: 300px;
+  height: 100px;
+  background-color: var(--poke-dark-blue);
+  border-radius: 10px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.decorative__dots {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+}
+.decorative__rottom-dex {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  object-position: bottom;
+  bottom: 0;
+  filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+.header {
+  z-index: 3;
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.header__nav {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0 20px;
+}
+.header__list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header__circleDecoration {
+  width: 25px;
+  height: 25px;
+  background-color: var(--poke-red);
+  border-radius: 50%;
+  border: solid 4px var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Paralucent;
+}
+
+.header__pokeball {
+  width: 8%;
+}
+
+.header__github {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 140px;
+  height: 60px;
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  font-family: "paralucent", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  padding: 10px;
+  white-space: nowrap;
+  box-shadow: var(--black) 5px 5px 0 0;
+}
+.header__github-img {
+  width: 30px;
+  height: 30px;
+}
+/* MAIN */
+main {
+  z-index: 1;
+  height: 100%;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  margin: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.main--noise {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  --lines: 0.0003px;
+  opacity: 0.4;
+  mask: repeating-radial-gradient(
+    circle at center,
+    #000,
+    var(--lines),
+    #000,
+    0,
+    /* transition hints make code easier to manage */ #0000,
+    calc(var(--lines) * 2),
+    #0000 0 /* trailing 0 is part of the hard stop logic */
+  );
+}
+
+/* -----Títulos ------ */
+.title {
+  z-index: 3;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.title__pokemon {
+  order: 2;
+  font-size: 8em;
+  text-transform: capitalize;
+  font-family: "xenera", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--poke-red);
+  paint-order: stroke fill;
+  text-shadow: 0 10px 7px rgba(0, 0, 0, 0.4), 0 -10px 1px #fff;
+  letter-spacing: -3px;
+}
+
+.title__id {
+  font-family: "paralucent", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  font-size: 14em;
+  order: 1;
+  color: transparent;
+  background: #bbbbbb;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  text-shadow: 0px 3px 3px white;
+}
+
+/* Contenedor flexible */
+.wrapper {
+  position: relative;
+  padding: 30px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* Columna izquierda */
+
+.wrapper__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50%;
+  height: 100%;
+}
+
+.wrapper__left-img {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.wrapper__left-img--random {
+  position: relative;
+  z-index: 10;
+  top: 20px;
+  width: 80%;
+  left: 20px;
+  filter: drop-shadow(42px -7px 1px var(--poke-blue));
+}
+
+/* Columna derecha con cuadrícula */
+
+.wrapper__right {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: var(--secondary-color);
+  font-family: paralucent-text, sans-serif;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+}
+.box--column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.box--row {
+  display: flex;
+  justify-content: space-around;
+}
+.box__title {
+  font-family: "paralucent", sans-serif;
+  font-size: 1em;
+}
+.box__text {
+  font-family: "paralucent", sans-serif;
+
+  font-style: normal;
+  font-size: 1.4em;
+  text-transform: capitalize;
+}
+.box__img {
+  width: 40px;
+  height: auto;
+  transform: rotate(45deg);
+  opacity: 0.8;
+}
+.box__eggGroup {
+  display: flex;
+  gap: 20px;
+  right: 0;
+}
+
+.wrapper__right-grid {
+  display: grid;
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 500px;
+  align-self: flex-end; /* Asegura que esté al final del padre */
+  padding: 3%;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(50px, 1fr) /* Ajusta las columnas */
+  );
+  grid-template-areas:
+    "text text"
+    "height egg"
+    "weight shiny"
+    "habitat shiny";
+  gap: 10px;
+  overflow: hidden; /* Evita desbordamientos */
+}
+
+.wrapper__right-grid-flovoredText {
+  align-self: center;
+  grid-area: text;
+  font-size: 1.05rem;
+  padding: 20px;
+  font-family: paralucent-text, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+  text-align: justify;
+  direction: ltr;
+
+  /* El alto ahora se ajustará automáticamente según el contenido */
+}
+
+.wrapper__right-grid-types {
+  grid-area: type;
+  display: none;
+}
+
+.wrapper__right-grid-height {
+  grid-area: height;
+}
+
+.wrapper__right-grid-weight {
+  grid-area: weight;
+}
+
+.wrapper__right-grid-egg {
+  grid-area: egg;
+}
+
+.wrapper__right-grid-shiny {
+  display: flex;
+  align-items: center;
+  grid-area: shiny;
+}
+
+.wrapper__right-grid-habitat {
+  grid-area: habitat;
+}
+.shiny__box--row {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* Estilos del footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 100px;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer__circlesDecoration {
+  position: absolute;
+  bottom: 0;
+  left: 42%;
+  right: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 1;
+}
+.footer__button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-8.33px);
+  height: 55%;
+  width: fit-content;
+  padding: 20px 40px 20px 40px;
+  border-radius: var(--radius);
+  background-color: var(--poke-red);
+  white-space: nowrap;
+  font-family: paralucent, sans-serif;
+  font-size: 0.9em;
+  color: var(--black);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.footer--background {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent 0%, white 60%);
+  z-index: 0;
+}
+
+@media (max-width: 1068px) {
+  .decorative__blue-notch {
+    width: 30%;
+    height: 70px;
+  }
+
+  .decorative__rottom-dex {
+    display: none;
+  }
+  .decorative__dots {
+    display: none;
+  }
+  .header__circleDecoration {
+    display: none;
+  }
+  .header__github {
+    max-width: 60px;
+    max-height: 55px;
+    border-radius: 400px;
+  }
+  .header__github-text {
+    display: none;
+  }
+
+  .header__pokeball {
+    width: 50px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    height: 59%;
+    justify-content: space-around;
+    align-items: center;
+    top: 0;
+  }
+
+  .title__pokemon {
+    font-size: 5.5em;
+    padding: 10px;
+  }
+
+  .title__id {
+    font-size: 7em;
+  }
+
+  .box > * {
+    font-size: 0.8em;
+  }
+
+  .wrapper__right {
+    align-content: end;
+  }
+  .wrapper__left-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 250px;
+    width: 400px;
+  }
+  .wrapper__left-img--random {
+    max-width: 200px;
+    height: auto;
+    left: 0;
+  }
+
+  .wrapper__right-grid {
+    min-height: 370px;
+  }
+  .wrapper__right-grid-flovoredText {
+    font-size: 1em;
+    display: table;
+  }
+
+  .footer__circlesDecoration {
+    display: none;
+  }
+}
+
+.button-74 {
+  display: flex;
+  color: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 30px;
+  box-shadow: var(--black) 4px 4px 0 0;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 30px;
+  line-height: 45px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: #fff;
+  color: var(--black);
+}
+
+.button-74:active {
+  box-shadow: var(--black) 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}

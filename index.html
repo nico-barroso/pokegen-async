@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PokeGen | Generador Pokémon</title>
+    <meta
+      name="description"
+      content="¿Ganas de probar suerte? Atrévete con el generador aleatorio de Pokémon. Aprende sobre sus estadísticas, su grupo de huevo y comprueba que compañero te toca."
+    />
+    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/favicon-32x32.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="header__nav">
+        <ul class="header__list">
+          <li class="header__circleDecoration"></li>
+          <li>
+            <img class="header__pokeball" src="./assets/pokeball.png" alt="" />
+          </li>
+        </ul>
+        <a class="header__github">
+          <img
+            class="header__github-img"
+            src="assets/github-mark.svg"
+            alt="Icono de GitHub"
+          />
+          <span class="header__github-text">Ir a GitHub</span></a
+        >
+      </nav>
+    </header>
+    <main>
+      <div class="main--noise"></div>
+      <!-----Decoraciones sin connotación semántica ----->
+      <div class="decorative__blue-notch"></div>
+      <img class="decorative__dots" src="./assets/dots.svg" alt="" />
+      <img
+        class="decorative__rottom-dex"
+        src="./assets/rottom-dex.svg"
+        alt=""
+      />
+      <!----------------------->
+      <section class="title">
+        <h1 class="title__pokemon"></h1>
+        <h2 class="title__id"></h2>
+      </section>
+      <section class="wrapper">
+        <section class="wrapper__left">
+          <article class="wrapper__left-img">
+            <img class="wrapper__left-img--random" src="" />
+          </article>
+        </section>
+        <section class="wrapper__right">
+          <div class="wrapper__right-grid">
+            <article class="wrapper__right-grid-flovoredText">
+              <p></p>
+            </article>
+            <article class="wrapper__right-grid-egg box">
+              <div class="box--column">
+                <h3 class="box__title">Grupos de huevos</h3>
+                <div class="box--row"></div>
+              </div>
+            </article>
+
+            <article class="wrapper__right-grid-height box">
+              <div class="box--column">
+                <h3 class="box__title">Altura</h3>
+                <p class="box__text"></p>
+              </div>
+            </article>
+            <article class="wrapper__right-grid-weight box">
+              <div class="box--column">
+                <h3 class="box__title">Peso</h3>
+                <p class="box__text"></p>
+              </div>
+            </article>
+            <article class="wrapper__right-grid-habitat box">
+              <div class="box--column">
+                <h3 class="box__title">Habitat</h3>
+                <p class="box__text"></p>
+              </div>
+            </article>
+            <!--revisar-->
+            <article class="wrapper__right-grid-shiny box">
+              <div class="box--column">
+                <h3 class="box__title">Version variocolor</h3>
+                <div class="shiny__box-row">
+                  <img class="random-image" src="" />
+                  <img class="random-image back" />
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer--background"></div>
+      <img
+        class="footer__circlesDecoration"
+        src="./assets/circles.svg"
+        alt=""
+      />
+      <button
+      type="button"
+      class="footer__button button-74"
+      onclick="window.location.reload();"
+    >
+      Generar Pokémon
+    </button>
+    </footer>
+  </body>
+</html>

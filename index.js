@@ -1,10 +1,11 @@
 /*
-
+El proyecto se basa en diferentes
 */
 
 //Creamos un número aleatorio entre 1 y 650, lo guardamos
 //en una constante llamada randomize que reutilizaremos en todo
 //el código
+
 const randomize = Math.floor(Math.random() * 650) + 1;
 
 //Función que hace una petición a la API de pokémon para recibir
@@ -21,47 +22,50 @@ const getPokedata = async () => {
       `https://pokeapi.co/api/v2/pokemon-species/${pokeData.name}/`
     );
     const habitatData = await habitat.json();
-    console.log(pokeData);
     return { pokeData, speciesData, habitatData };
   } catch (error) {
     console.log(error);
   }
 };
 
-const showPokemon = () => {
-  const h1 = document.querySelector(".pokemon-name");
-  const typesCont = document.querySelector("#types");
+/*
+ * CONSTRUCTOR - TODO
+ *
+ *
+ */
+const pokemonConstructor = () => {
   getPokedata().then(({ pokeData, speciesData, habitatData }) => {
-    h1.innerHTML = pokeData.name;
-    pokeImg(pokeData);
-    pokeDescription(speciesData);
+    pokeTitle(pokeData);
+    pokeSprite(pokeData);
+    pokeDesc(speciesData);
     pokeWeight(pokeData);
     pokeHeight(pokeData);
     pokeHabitat(habitatData);
     pokemonEggGroup(speciesData);
-    const type = () => {
-      const types = pokeData.types;
-      types.forEach((type) => {
-        const p = document.createElement("p");
-        p.innerHTML = type.type.name;
-        typesCont.append(p);
-      });
-    };
-    type();
+    pokeShiny(pokeData);
   });
 };
 
-const pokeText = (pokeData) => {};
+const pokeTitle = (pokeData) => {
+  const h1 = document.querySelector(".title__pokemon");
+  const h2 = document.querySelector(".title__id");
+  h1.innerHTML = pokeData.name;
+  h2.innerHTML = "#" + pokeData.id;
+};
 
 //Función que recibe los datos del pokémon y muestra la imagen del Pokémon
 //en la columna central.
-const pokeImg = (pokeData) => {
+const pokeSprite = (pokeData) => {
   const pokemonImg = pokeData.sprites.other["official-artwork"].front_default;
-  const image = document.querySelector(".random-image");
+  const image = document.querySelector(".wrapper__left-img--random");
   image.src = pokemonImg;
 };
 
-const pokeDescription = (speciesData) => {
+/*
+ * TODO
+ *
+ */
+const pokeDesc = (speciesData) => {
   const flavorTexts = [];
   for (let texts of speciesData.flavor_text_entries) {
     if (texts.language.name === "es") {
@@ -71,26 +75,38 @@ const pokeDescription = (speciesData) => {
   //Ahora con el tamaño del array, añadimos la entrada de la Pokedex de
   //manera aleatoria y la mostramos por DOM.
   const random = Math.floor(Math.random() * flavorTexts.length);
-  const p = document.querySelector(".flavor-text");
+  const p = document.querySelector(".wrapper__right-grid-flovoredText");
   p.innerHTML = flavorTexts[random];
 };
 
+/*
+ * TODO
+ *
+ */
 const pokeWeight = (pokeData) => {
   const weight = pokeData.weight;
   const weightKg = weight / 10;
-  const p = document.querySelector(".weight > p");
+  const p = document.querySelector(".wrapper__right-grid-weight  .box__text");
   p.innerHTML = weightKg + " kg";
 };
 
+/*
+ * TODO
+ *
+ */
 const pokeHeight = (pokeData) => {
   const height = pokeData.height;
   const heightM = height / 10;
-  const p = document.querySelector(".height > p");
+  const p = document.querySelector(".wrapper__right-grid-height  .box__text");
   p.innerHTML = heightM + " m";
 };
 
+/*
+ *TODO
+ *
+ */
 const pokeHabitat = (habitatData) => {
-  const p = document.querySelector(".habitat > p");
+  const p = document.querySelector(".wrapper__right-grid-habitat  .box__text");
   const habitat = habitatData.habitat;
   const habitatUrl = async () => {
     if (habitat && habitat.url) {
@@ -109,13 +125,23 @@ const pokeHabitat = (habitatData) => {
         }
       }
     } else {
-      p.innerHTML = "desconocido";
+      p.innerHTML = "Desconocido";
     }
   });
 };
 
+/*
+ * TODO
+ *
+ */
+/* --- Dato Friki --- */
+// En el mundo Pokémon, algunas de las criaturas pueden tener más de un grupo de huevos,
+// por ello aprovechando que la API devuelve un obijeto, si tiene más de una entrada,
+// añadimos un espacio entre medias para que no quede junto.
 const pokemonEggGroup = async (speciesData) => {
-  const p = document.querySelector(".egg-group > p");
+  const container = document.querySelector(
+    ".wrapper__right-grid-egg  .box--row"
+  );
   const eggGroup = speciesData.egg_groups;
   const eggGroups = async () => {
     for (let egg of eggGroup) {
@@ -123,9 +149,10 @@ const pokemonEggGroup = async (speciesData) => {
       const eggData = await resp.json();
       for (let nameP of eggData.names) {
         if (nameP.language.name === "es") {
-          const span = document.createElement("span");
-          span.innerHTML = nameP.name;
-          p.appendChild(span);
+          const p = document.createElement("p");
+          p.classList.add("box__text");
+          p.innerHTML = nameP.name;
+          container.appendChild(p);
         }
       }
     }
@@ -133,4 +160,23 @@ const pokemonEggGroup = async (speciesData) => {
   await eggGroups();
 };
 
-showPokemon();
+const pokeShiny = (pokeData) => {
+  const frontSprite = () => {
+    const img = document.querySelector(
+      ".wrapper__right-grid-shiny .random-image"
+    );
+    const shiny = pokeData.sprites.front_shiny;
+    img.src = shiny;
+  };
+  const backSprite = () => {
+    const img = document.querySelector(
+      ".wrapper__right-grid-shiny .random-image.back"
+    );
+    const shiny = pokeData.sprites.back_shiny;
+    img.src = shiny;
+  };
+  frontSprite();
+  backSprite();
+};
+
+pokemonConstructor();
