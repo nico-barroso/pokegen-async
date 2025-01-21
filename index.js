@@ -1,15 +1,53 @@
 /*
-El proyecto se basa en diferentes
+* PokeGen toma los datos de la PokeApi para funcionar -> https://pokeapi.co/
+* ------------------------------------------------------------------------------------------
+*  PokeGen fuhnciona enviando una petición a la API con getPokeData() del id del pokemon generado aleatoriamente
+*  con la constante randomize.
+*
+*  A partir de recibir los datos del Pokémon, se gestionan se pintan a través del pokemonConstructor para recibir el nombre del Pokémon y la altura, el habitat...
+*  como se puede ver en el diagrama de más abajo.
+*
+*  
+*
+*
+*
+*
+*
+*                                                                       * showLoading() 
+*                                                                                           
+*                                                                                           
+*                                                                            ┌───── pokeTitle()   
+*                                                                            │                  
+*                                                                            │                  
+*                                                                            ├───── pokeDescription()    
+*                                                                            │                  
+*                                                                            │                  
+*   ┌───────────────┐        ┌────────────────────────┐                      ├───── pokeWeight()  
+*   │               │        │                        │                      │                  
+*   │    Funcion    │        │                        │                      │                  
+*   │               ┼────────►  pokemonConstructor()  ┼───────────► Promise  ├───── pokeHeight()  
+*   │   Asincrona   │        │                        │                      │                  
+*   │ getPokeData() │        │                        │                      │                  
+*   └───────────────┘        └────────────────────────┘                      ├───── pokeHabitat() 
+*                                                                            │                  
+*                                                                            │                  
+*                                                                            ├───── pokeEggGroup()
+*                                                                            │                  
+*                                                                            │                  
+*                                                                            └───── pokeShiny()   
+*                                                                                            
+*                                                                                            
+*                                                                       * hideLoading() 
+*
 */
 
-//Creamos un número aleatorio entre 1 y 650, lo guardamos
-//en una constante llamada randomize que reutilizaremos en todo
-//el código
+
+//Creamos un número aleatorio entre 1 y 650, lo guardamos en una constante llamada randomize 
+// que reutilizaremos como la id del Pokémon a lo largo del código
 
 const randomize = Math.floor(Math.random() * 650) + 1;
 
-//Función que hace una petición a la API de pokémon para recibir
-//los datos generales de un pokémon en específico.
+//Función asíncrona 
 const getPokedata = async () => {
   try {
     const pokemonDataRaw = await fetch(
@@ -28,24 +66,46 @@ const getPokedata = async () => {
   }
 };
 
+
+const loadingElement = document.getElementById("loading");
+const showLoading = () => {
+  loadingElement.classList.remove("hidden");
+};
+
+const hideLoading = () => {
+  loadingElement.classList.add("hidden");
+};
+
 /*
  * CONSTRUCTOR - TODO
  *
  *
  */
-const pokemonConstructor = () => {
-  getPokedata().then(({ pokeData, speciesData, habitatData }) => {
-    pokeTitle(pokeData);
-    pokeSprite(pokeData);
-    pokeDesc(speciesData);
-    pokeWeight(pokeData);
-    pokeHeight(pokeData);
-    pokeHabitat(habitatData);
-    pokemonEggGroup(speciesData);
-    pokeShiny(pokeData);
-  });
+const pokemonConstructor = async () => {
+  //Primero
+  showLoading();
+
+  const { pokeData, speciesData, habitatData } = await getPokedata();
+  await Promise.all([
+    pokeTitle(pokeData),
+    pokeSprite(pokeData),
+    pokeDescription(speciesData),
+    pokeWeight(pokeData),
+    pokeHeight(pokeData),
+    pokeHabitat(habitatData),
+    pokemonEggGroup(speciesData),
+    pokeShiny(pokeData),
+  ]);
+
+  setTimeout(() => {
+    hideLoading();
+  }, 500);
 };
 
+/*
+ *
+ *
+ */
 const pokeTitle = (pokeData) => {
   const h1 = document.querySelector(".title__pokemon");
   const h2 = document.querySelector(".title__id");
@@ -65,7 +125,7 @@ const pokeSprite = (pokeData) => {
  * TODO
  *
  */
-const pokeDesc = (speciesData) => {
+const pokeDescription = (speciesData) => {
   const flavorTexts = [];
   for (let texts of speciesData.flavor_text_entries) {
     if (texts.language.name === "es") {

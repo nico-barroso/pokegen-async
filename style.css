@@ -1,5 +1,3 @@
-/* Importación de fuentes */
-/* Xena */ /* Paralucent */
 @import url("https://use.typekit.net/qzi0yho.css");
 
 :root {
@@ -22,6 +20,11 @@
   transition: all 0.3s;
 }
 
+a:visited {
+  text-decoration: none;
+  color: var(--black);
+}
+
 body {
   /*Está en el body por motivos de overflow en el footer.
   En este caso, al existir bloques sobreexpuestos en el footer, se necesita poner el overflow hidden,
@@ -38,20 +41,6 @@ body {
 
 /*Cuadrado de decoración azul en la parte central superior*/
 
-#loading-animation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  z-index: 9999;
-}
 /* Página oculta inicialmente */
 body.loaded #loading-animation {
   display: none;
@@ -137,6 +126,14 @@ body.loaded #loading-animation {
   white-space: nowrap;
   box-shadow: var(--black) 5px 5px 0 0;
 }
+.header__github:hover {
+  background-color: var(--black);
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+.header__github:hover .header__github-img {
+  filter: invert();
+}
 .header__github-img {
   width: 30px;
   height: 30px;
@@ -197,7 +194,7 @@ main {
   font-style: normal;
   color: var(--poke-red);
   paint-order: stroke fill;
-  text-shadow: 0 10px 7px rgba(0, 0, 0, 0.4), 0 -10px 1px #fff;
+  text-shadow: 10px 5px 1px #ffffff;
   letter-spacing: -3px;
 }
 
@@ -205,7 +202,7 @@ main {
   font-family: "paralucent", sans-serif;
   font-weight: 900;
   font-style: normal;
-  font-size: 14em;
+  font-size: 11em;
   order: 1;
   color: transparent;
   background: #bbbbbb;
@@ -237,7 +234,9 @@ main {
 
 .wrapper__left-img {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+
   width: 100%;
   max-width: 600px;
   height: auto;
@@ -250,6 +249,7 @@ main {
   width: 80%;
   left: 20px;
   filter: drop-shadow(42px -7px 1px var(--poke-blue));
+  object-fit: cover;
 }
 
 /* Columna derecha con cuadrícula */
@@ -300,12 +300,9 @@ main {
   transform: rotate(45deg);
   opacity: 0.8;
 }
-.box__eggGroup {
-  display: flex;
-  gap: 20px;
-  right: 0;
+.wrapper__right-grid-egg .box--row {
+  gap: 10px;
 }
-
 .wrapper__right-grid {
   display: grid;
   position: relative;
@@ -341,8 +338,6 @@ main {
   border-radius: 20px;
   text-align: justify;
   direction: ltr;
-
-  /* El alto ahora se ajustará automáticamente según el contenido */
 }
 
 .wrapper__right-grid-types {
@@ -399,21 +394,35 @@ main {
   z-index: 1;
 }
 .footer__button {
-  position: relative;
+  z-index: 10;
   display: flex;
+  color: var(--white);
   justify-content: center;
   align-items: center;
   transform: translateY(-8.33px);
   height: 55%;
   width: fit-content;
   padding: 20px 40px 20px 40px;
-  border-radius: var(--radius);
+  border-radius: 30px;
+  border: 2px solid var(--black);
   background-color: var(--poke-red);
   white-space: nowrap;
   font-family: paralucent, sans-serif;
   font-size: 0.9em;
   color: var(--black);
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--black) 4px 4px 0 0;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.footer__button:hover {
+  background-color: #fff;
+  color: var(--black);
+}
+
+.footer__button:active {
+  box-shadow: var(--black) 2px 2px 0 0;
+  transform: translate(2px, 2px);
 }
 
 .footer--background {
@@ -509,32 +518,71 @@ main {
     display: none;
   }
 }
-
-.button-74 {
+.loader-container {
   display: flex;
-  color: var(--white);
-  border: 2px solid var(--black);
-  border-radius: 30px;
-  box-shadow: var(--black) 4px 4px 0 0;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 0 30px;
-  line-height: 45px;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  background-color: var(--poke-red);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
 }
 
-.button-74:hover {
-  background-color: #fff;
-  color: var(--black);
+.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
-.button-74:active {
-  box-shadow: var(--black) 2px 2px 0 0;
-  transform: translate(2px, 2px);
+.loader {
+  width: 65px;
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  border-radius: 50px;
+  box-shadow: 0 0 0 3px inset #fff;
+  animation: l5 2.5s infinite;
+}
+
+.loader:after {
+  animation-delay: -1.25s;
+  border-radius: 0;
+}
+
+@keyframes l5 {
+  0% {
+    inset: 0 35px 35px 0;
+  }
+  12.5% {
+    inset: 0 35px 0 0;
+  }
+  25% {
+    inset: 35px 35px 0 0;
+  }
+  37.5% {
+    inset: 35px 0 0 0;
+  }
+  50% {
+    inset: 35px 0 0 35px;
+  }
+  62.5% {
+    inset: 0 0 0 35px;
+  }
+  75% {
+    inset: 0 0 35px 35px;
+  }
+  87.5% {
+    inset: 0 0 35px 0;
+  }
+  100% {
+    inset: 0 35px 35px 0;
+  }
 }

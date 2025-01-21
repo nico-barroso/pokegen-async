@@ -25,7 +25,10 @@
             <img class="header__pokeball" src="./assets/pokeball.png" alt="" />
           </li>
         </ul>
-        <a class="header__github">
+        <a
+          class="header__github"
+          href="https://github.com/nico-barroso/pokegen_async"
+        >
           <img
             class="header__github-img"
             src="assets/github-mark.svg"
@@ -36,6 +39,10 @@
       </nav>
     </header>
     <main>
+      <div id="loading" class="loader-container">
+        <div class="loader"></div>
+      </div>
+
       <div class="main--noise"></div>
       <!-----Decoraciones sin connotación semántica ----->
       <div class="decorative__blue-notch"></div>
@@ -108,12 +115,12 @@
         alt=""
       />
       <button
-      type="button"
-      class="footer__button button-74"
-      onclick="window.location.reload();"
-    >
-      Generar Pokémon
-    </button>
+        type="button"
+        class="footer__button"
+        onclick="window.location.reload();"
+      >
+        Generar Pokémon
+      </button>
     </footer>
   </body>
 </html>
