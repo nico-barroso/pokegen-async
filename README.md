@@ -21,8 +21,12 @@ PokeGen es una aplicación web que genera información aleatoria sobre Pokémon 
 - [PokeAPI](https://pokeapi.co/)
 
 ## Uso
+Hay dos maneras de disfrutar el proyecto:
 
-Abre el archivo index.html en tu navegador web.
+- Accede directamente al [despliegue web](pokegen-async.vercel.app).
+
+-Abre el archivo index.html en tu navegador web.
+
 La aplicación generará un Pokémon aleatorio y mostrará su información.
 Haz clic en el botón "Generar Pokémon" para obtener un nuevo Pokémon aleatorio.
 
