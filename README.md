@@ -1,5 +1,5 @@
-![Logo](https://framerusercontent.com/images/zJBgnto0UuieHjFzX0KB4xPLrLk.png)
 # ThePower - PokeGen - Pokédex aleatoria
+![PokeGen _ Generador Pok_mon](https://github.com/user-attachments/assets/711c8718-8d4e-484f-a22d-2fd391fbf48c)
 
 PokeGen es una aplicación web que genera información aleatoria sobre Pokémon utilizando la [PokeAPI](https://pokeapi.co/). La aplicación muestra detalles como el nombre, la descripción, el peso, la altura, el hábitat, los grupos de huevos y las versiones variocolor de los Pokémon.
 
